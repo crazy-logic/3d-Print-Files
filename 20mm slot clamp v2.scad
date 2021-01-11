@@ -1,3 +1,12 @@
+/*
+    created 10 Jan 2021
+    by Matt Jones (Crazy-Logic)  
+
+    This example code is in the public domain.
+    
+    This is for clamping to a 20mm t-slot extrusion, using a 35mm M8 bolt and wing nut/leaver. 
+*/
+
 $d = 21;
 
 
