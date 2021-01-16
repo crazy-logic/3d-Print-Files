@@ -1,14 +1,16 @@
 /*
     created 15 Jan 2021
+    Modified 16 Jan 2021 - adding bolt holes
     by Matt Jones (Crazy-Logic)  
     This example code is in the public domain.
     
     This is for slotting on the end of a 20mm t-slot extrusion.
 */
 
-tslotsize = 21;
-wallthickness = 3;
+tslotsize = 20.5;
+wallthickness = 5; //i'm using 5mm to account for the fact i only have 10mm m5 bolt. 
 length = 20;
+screwholesize = 2.75; //dia 5.5
 
 
 
@@ -18,6 +20,20 @@ difference(){
     //the +/-1 here are to account for render issues. 
     translate([wallthickness,wallthickness,-1])
     cube([tslotsize,tslotsize,length+1-wallthickness]);
+    //bolt holes 
+    translate([tslotsize/2+wallthickness,wallthickness+1,10])
+    rotate([90,0,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
+    translate([tslotsize/2+wallthickness,tslotsize+2*wallthickness+1,10])
+    rotate([90,0,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
+    
+    translate([-1,tslotsize/2+wallthickness,10])
+    rotate([0,90,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
+    translate([(-1+tslotsize+wallthickness),tslotsize/2+wallthickness,10])
+    rotate([0,90,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
 }
 
 finwidth = 5;
