@@ -1,6 +1,7 @@
 /*
     created 15 Jan 2021
     Modified 16 Jan 2021 - adding bolt holes
+    Modified 17 Jan 2021 - correction of tslot hole depth/length, correction of bolt hole size in fins for an M8 
     by Matt Jones (Crazy-Logic)  
     This example code is in the public domain.
     
@@ -9,7 +10,7 @@
 
 tslotsize = 20.5;
 wallthickness = 5; //i'm using 5mm to account for the fact i only have 10mm m5 bolt. 
-length = 20;
+length = 20; //of insert - tslot nuts are 15mm by 10mm so really 20mm minimum 
 screwholesize = 2.75; //dia 5.5
 
 
@@ -19,7 +20,7 @@ difference(){
     cube([tslotsize+wallthickness+wallthickness,tslotsize+wallthickness+wallthickness,length+wallthickness]);
     //the +/-1 here are to account for render issues. 
     translate([wallthickness,wallthickness,-1])
-    cube([tslotsize,tslotsize,length+1-wallthickness]);
+    cube([tslotsize,tslotsize,length+1]);
     //bolt holes 
     translate([tslotsize/2+wallthickness,wallthickness+1,10])
     rotate([90,0,0])
@@ -37,7 +38,7 @@ difference(){
 }
 
 finwidth = 5;
-holesize=4; //radius
+holesize=4.5; //radius
 
 
 
