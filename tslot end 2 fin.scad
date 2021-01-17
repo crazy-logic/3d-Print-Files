@@ -2,8 +2,9 @@
     created 15 Jan 2021
     Modified 16 Jan 2021 - adding bolt holes
     Modified 17 Jan 2021 - correction of tslot hole depth/length, correction of bolt hole size in fins for an M8 
-     Modified 17 Jan 2021 - Git checkin 
+    
     by Matt Jones (Crazy-Logic)  
+    
     This example code is in the public domain.
     
     This is for slotting on the end of a 20mm t-slot extrusion.
