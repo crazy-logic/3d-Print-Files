@@ -1,43 +1,73 @@
 /*
-    created 15 Jan 2021
+    created 15 Jan 2021    
+    Modified 23 Jan 2021 - adding bolt holes, correction of tslot hole depth/length, correction of bolt hole size in fins for an M8, make fins thinner (4.8mm), add 2mm to fins for clearance, round corners (2mm)
+
     by Matt Jones (Crazy-Logic)  
     This example code is in the public domain.
     
     This is for slotting on the end of a 20mm t-slot extrusion.
 */
 
-tslotsize = 21;
-wallthickness = 3;
-length = 20;
+tslotsize = 20.5;
+wallthickness = 5;//i'm using 5mm to account for the fact i only have 10mm m5 bolt. 
+length = 20; //of insert - tslot nuts are 15mm by 10mm so really 20mm minimum 
+screwholesize = 2.75; //dia 5.5
+cornerround = 2;
 
 
 
 
 difference(){
-    cube([tslotsize+wallthickness+wallthickness,tslotsize+wallthickness+wallthickness,length+wallthickness]);
+    hull(){
+        //creat the four bottom corners
+        translate([cornerround,cornerround,0]) cylinder(r=cornerround,h=length,$fn=30);
+        translate([tslotsize+2*wallthickness-cornerround,cornerround,0]) cylinder(r=cornerround,h=length,$fn=30);
+        translate([cornerround,tslotsize+2*wallthickness-cornerround,0]) cylinder(r=cornerround,h=length,$fn=30);
+        translate([tslotsize+2*wallthickness-cornerround,tslotsize+2*wallthickness-cornerround,0]) cylinder(r=cornerround,h=length,$fn=30);
+        
+        //create the top 4 ball corners 
+        translate([cornerround,cornerround,length+wallthickness-cornerround]) sphere(r = cornerround,$fn=30);
+        translate([tslotsize+2*wallthickness-cornerround,cornerround,length+wallthickness-cornerround]) sphere(r = cornerround,$fn=30);
+        translate([cornerround,tslotsize+2*wallthickness-cornerround,length+wallthickness-cornerround]) sphere(r = cornerround,$fn=30);
+        translate([tslotsize+2*wallthickness-cornerround,tslotsize+2*wallthickness-cornerround,length+wallthickness-cornerround]) sphere(r = cornerround,$fn=30);
+        
+        }
     //the +/-1 here are to account for render issues. 
     translate([wallthickness,wallthickness,-1])
-    cube([tslotsize,tslotsize,length+1-wallthickness]);
+    cube([tslotsize,tslotsize,length+1]);
+    //bolt holes 
+    translate([tslotsize/2+wallthickness,wallthickness+1,10])
+    rotate([90,0,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
+    translate([tslotsize/2+wallthickness,tslotsize+2*wallthickness+1,10])
+    rotate([90,0,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
+    
+    translate([-1,tslotsize/2+wallthickness,10])
+    rotate([0,90,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
+    translate([(-1+tslotsize+wallthickness),tslotsize/2+wallthickness,10])
+    rotate([0,90,0])
+            cylinder(h=wallthickness+2, r=screwholesize, center=false,$fn=100);
 }
 
+
 finwidth = 5;
-holesize=4; //radius
-
-
+holesize=4.5; //radius
 
 //fins
 for (i =[-1:1]){
     difference(){
         union(){
-        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth,0,length+wallthickness])
-            cube([finwidth,tslotsize+wallthickness+wallthickness,tslotsize/2]);
+        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth+0.1,0,length+wallthickness-cornerround])
+            cube([finwidth-0.2,tslotsize+wallthickness+wallthickness,tslotsize/2+2+cornerround]);
 
-        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth,wallthickness+tslotsize/2,length+wallthickness+tslotsize/2])
+        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth+0.1,wallthickness+tslotsize/2,length+wallthickness+tslotsize/2+2])
             rotate([0,90,0])
-            cylinder(h=finwidth, r=tslotsize/2+wallthickness, center=false,$fn=100);
+            cylinder(h=finwidth-0.2, r=tslotsize/2+wallthickness, center=false,$fn=100);
         }
         //hole
-        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth-1,wallthickness+tslotsize/2,length+wallthickness+tslotsize/2])
+        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth-1,wallthickness+tslotsize/2,length+wallthickness+tslotsize/2+2])
             rotate([0,90,0])
             cylinder(h=finwidth+2, r=holesize, center=false,$fn=100);
     }
