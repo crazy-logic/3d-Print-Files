@@ -3,7 +3,7 @@
     Modified 16 Jan 2021 - adding bolt holes
     Modified 17 Jan 2021 - correction of tslot hole depth/length, correction of bolt hole size in fins for an M8 
     Modified 22 Jan 2021 - make fins thinner (4.8mm), add 2mm to fins for clearance, round corners (2mm)
-
+    Modified 23 Jan 2021 - make fins longer (width of total plus the gap) and paramatrised the tolerance for printing. 
     by Matt Jones (Crazy-Logic)  
     
     This example code is in the public domain.
@@ -55,23 +55,26 @@ difference(){
 
 finwidth = 5;
 holesize=4.5; //radius
-
+gap = 1;
+finheight = tslotsize+2*wallthickness+gap; //tslot+walls+gap
+pivheight = tslotsize/2+wallthickness+gap; 
+tolerance = 0.15; //use this to tune the deflection when tightened and friction where the fins meet. a greater positive number removes more material. 
 
 
 //fins
 for (i =[0:1]){
     difference(){
         union(){
-        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth+finwidth+0.1,0,length+wallthickness-cornerround])
-            cube([finwidth-0.2,tslotsize+wallthickness+wallthickness,tslotsize/2+2+cornerround]);
+        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth+finwidth+tolerance,0,length+wallthickness-cornerround])
+            cube([finwidth-tolerance-tolerance,tslotsize+wallthickness+wallthickness,pivheight+cornerround]);
 
-        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth+finwidth+0.1,wallthickness+tslotsize/2,length+wallthickness+tslotsize/2+2])
+        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth+finwidth+tolerance,wallthickness+tslotsize/2,length+wallthickness+pivheight])
             rotate([0,90,0])
-            cylinder(h=finwidth-0.2, r=tslotsize/2+wallthickness, center=false,$fn=100);
+            cylinder(h=finwidth-tolerance-tolerance, r=tslotsize/2+wallthickness, center=false,$fn=100);
         }
         //hole
-        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth-1+finwidth,wallthickness+tslotsize/2,length+wallthickness+tslotsize/2+2])
+        translate([wallthickness+tslotsize/2-finwidth/2-2*i*finwidth-1+finwidth,wallthickness+tslotsize/2,length+wallthickness+pivheight])
             rotate([0,90,0])
-            cylinder(h=finwidth+2, r=holesize, center=false,$fn=100);
+            cylinder(h=finwidth+2-tolerance, r=holesize, center=false,$fn=100);
     }
 }
