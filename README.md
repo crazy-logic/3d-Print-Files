@@ -3,7 +3,7 @@ a number of design files for 3d printing
 
 
 # T-slot accessories 
-t-slot end to 2/3 fins. 
+t-slot end to 2/3 fins. /n
 t-slot to UNC 1/4-20 bolt hole.
 t-slot clamp.
 
