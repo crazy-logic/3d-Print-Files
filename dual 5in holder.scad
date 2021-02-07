@@ -1,6 +1,7 @@
 /*
     created 7 Feb 2021
     modified 7 Feb 2021 - correct the dimms and add bay dividors 
+    modified 7 Feb 2021 - adding 
     
     by Matt Jones (Crazy-Logic)  
     This example code is in the public domain.
@@ -31,8 +32,8 @@ hoff = (depth-bayh)/2;
 difference(){
     cube([width,depth,height]);
     //cutout for drive
-    translate([woff,hoff,-1])
-    cube([bayw,bayh,5+2]);
+    //translate([woff,hoff,-1])
+    //cube([bayw,bayh,5+2]);
     
     translate([woff,hoff,-1])
     cube([cheight,cwidth,height+2]);
@@ -58,3 +59,14 @@ difference(){
     translate([woff+7*cheight+7,hoff,-1])
     cube([cheight,cwidth,height+2]);
 }
+
+translate([width-woff,depth-10,height])
+cube([woff,10,10]);
+translate([width-woff,0,height])
+cube([woff,10,10]);
+
+translate([width-10,depth-hoff,height])
+cube([10,hoff,10]);
+
+translate([0,depth-hoff,height])
+cube([10,hoff,10]);
