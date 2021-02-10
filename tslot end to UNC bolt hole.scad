@@ -1,5 +1,6 @@
 /*
     created 30 Jan 2021
+    Modified 10th Feb  - change UNC bolt size 
     by Matt Jones (Crazy-Logic)  
     
     This example code is in the public domain.
@@ -12,7 +13,7 @@ wallthickness = 5; //i'm using 5mm to account for the fact i only have 10mm m5 b
 length = 20; //of insert - tslot nuts are 15mm by 10mm so really 20mm minimum 
 screwholesize = 2.75; //dia 5.5
 cornerround = 2;
-UNCboltholeradius = 3.175;
+UNCboltholeradius = 3.5; // changed from 3.175;
 UNCboltheadheight = 7;
 
 
