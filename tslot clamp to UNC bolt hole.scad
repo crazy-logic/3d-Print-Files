@@ -1,5 +1,6 @@
 /*
     created 31 Jan 2021
+    Modified 10th Feb - UNC bolt size correction
     by Matt Jones (Crazy-Logic)  
     This example code is in the public domain.
     
@@ -7,7 +8,7 @@
 */
 
 $d = 21;
-UNCboltholeradius = 3.175;
+UNCboltholeradius = 3.5; //up from 3.175
 UNCboltheadheight = 7;
 
 
