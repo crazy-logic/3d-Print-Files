@@ -1,0 +1,39 @@
+/*
+    created 7 April 2021
+    by Matt Jones (Crazy-Logic)  
+    This example code is in the public domain.
+    
+    This is a mounting for the 28BYJ-48 unipole stepper motors in the form of a wheel. 
+    This roughly matches the video https://www.youtube.com/watch?v=uqXhvmgMrdc 
+*/
+
+
+difference(){
+    //the bulk and flanges 
+    union(){
+        cylinder(h=10,r1=15.91,r2=15.91,center=false,$fn=100);
+        cylinder(h=1,r1=17,r2=17,center=false,$fn=100); 
+        translate([0,0,1])cylinder(h=1,r1=17,r2=15,center=false,$fn=100); 
+        translate([0,0,8])cylinder(h=1,r1=15,r2=17,center=false,$fn=100); 
+        translate([0,0,9])cylinder(h=1,r1=17,r2=17,center=false,$fn=100); 
+    }
+    
+    //shaft
+    cylinder(h=2.5,r1=2.75,r2=2.75,center=false,$fn=100);
+    translate([0,0,2.5])
+    intersection(){
+        cylinder(h=6,r1=2.75,r2=2.75,center=false,$fn=100);
+        translate([-1.75,-5,0])
+        cube([3.5,10,6],center=false);
+    }
+     
+    //holes 
+    translate([10,0,-1])cylinder(h=12,r1=5,r2=5,center=false,$fn=100);
+    translate([-10,0,-1])cylinder(h=12,r1=5,r2=5,center=false,$fn=100);
+    translate([0,10,-1])cylinder(h=12,r1=5,r2=5,center=false,$fn=100);
+    translate([0,-10,-1])cylinder(h=12,r1=5,r2=5,center=false,$fn=100);
+    
+    //notch for line
+    rotate([0,0,45])translate([16,0,-1])cylinder(h=12,r1=0.5,r2=0.5,center=false,$fn=100);
+}
+
